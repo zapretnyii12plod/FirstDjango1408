@@ -31,6 +31,7 @@ def item(request, id):
  for it in itemslist:
   if (it['id'] == id):
    text = "Name: "+str(it['name'])+", Quantity: "+str(it['quantity'])
+   text += "<br/><a href='/items'>Back to items list</a>"
    found = True
  if (found):
   return HttpResponse(text)
@@ -39,8 +40,8 @@ def item(request, id):
  return HttpResponseNotFound(text)
 
 def items(request):
- text = "<ul>"
+ text = "<ol>"
  for it in itemslist:
   text += "<li>Number: "+str(it['id'])+ " Name: <a href='/item/"+str(it['id'])+"'>"+str(it['name'])+"</a>, Quantity: "+str(it['quantity'])+"</li>"
- text += "</ul>" 
+ text += "</ol>" 
  return HttpResponse(text)
