@@ -10,10 +10,17 @@ itemslist = [
 ]
 
 # Create your views here.
-def root(request):
+def root_old(request):
  text = '<h1>"Изучаем django"</h1>'
  text += '<strong>Автор</strong>: <i>Кантёпкин Д.А.</i>'
  return HttpResponse(text)
+
+def root(request):
+ context = {
+  "name": "Petrov Ivan Nikolaevich",
+  "email": "my_mail@mail.ru"
+ }
+ return render(request, 'index.html', context)
 
 def about(request):
   user = {'Имя': 'Денис', 
@@ -40,8 +47,12 @@ def item(request, id):
  return HttpResponseNotFound(text)
 
 def items(request):
- text = "<ol>"
- for it in itemslist:
-  text += "<li>Number: "+str(it['id'])+ " Name: <a href='/item/"+str(it['id'])+"'>"+str(it['name'])+"</a>, Quantity: "+str(it['quantity'])+"</li>"
- text += "</ol>" 
- return HttpResponse(text)
+#  text = "<ol>"
+#  for it in itemslist:
+#   text += "<li>Number: "+str(it['id'])+ " Name: <a href='/item/"+str(it['id'])+"'>"+str(it['name'])+"</a>, Quantity: "+str(it['quantity'])+"</li>"
+#  text += "</ol>" 
+#  return HttpResponse(text)
+ context = {
+  "items": itemslist
+ }
+ return render(request, "items-list.html", context)

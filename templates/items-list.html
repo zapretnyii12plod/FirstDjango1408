@@ -1,0 +1,5 @@
+<ol>
+{% for it in items %}
+<li>Number: {{ it.id }} Name: <a href='/item/{{ it.id }}'>{{it.name}}</a>, Quantity: {{it.quantity}}</li>
+{% endfor %}
+</ol>
