@@ -1,5 +1,14 @@
-<ol>
-{% for it in items %}
-<li>Number: {{ it.id }} Name: <a href='/item/{{ it.id }}'>{{it.name}}</a>, Quantity: {{it.quantity}}</li>
-{% endfor %}
-</ol>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item list</title>
+</head>
+<body>
+    <ol>
+        {% for item in items %}
+        <li>Name: <a href='/item/{{ item.id }}'>{{item.name}}</a>, Quantity: {{item.quantity}}</li>
+        {% endfor %}
+    </ol>    
+</body>
+</html>
