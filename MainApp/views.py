@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 
 itemslist = [
@@ -32,12 +32,15 @@ def item(request, id):
   if (it['id'] == id):
    text = "Name: "+str(it['name'])+", Quantity: "+str(it['quantity'])
    found = True
- if (not(found)):
+ if (found):
+  return HttpResponse(text)
+ else:
   text = "Good with id "+str(id)+" not found"
- return HttpResponse(text)
+ return HttpResponseNotFound(text)
 
 def items(request):
- text = ''
+ text = "<ul>"
  for it in itemslist:
-  text += "Number: "+str(it['id'])+ " Name: <a href='/item/"+str(it['id'])+"'>"+str(it['name'])+"</a>, Quantity: "+str(it['quantity'])+"<br/>"
+  text += "<li>Number: "+str(it['id'])+ " Name: <a href='/item/"+str(it['id'])+"'>"+str(it['name'])+"</a>, Quantity: "+str(it['quantity'])+"</li>"
+ text += "</ul>" 
  return HttpResponse(text)
