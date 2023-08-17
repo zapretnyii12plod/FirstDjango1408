@@ -28,20 +28,22 @@ def about(request):
           'Фамилия': 'Иванов',
           'Телефон': '8-923-600-01-02',
           'email': 'vasya@mail.ru'}
-  text = ''
+  text = "<div><a href='/'>Home</a> > <a href='/about'>About</a></div>"
+  text += "<br>"
   for idx, str_ in user.items():
-   text += idx + ': ' + str_ + '<br/>' 
+   text += idx + ': ' + str_ + '<br/>'
+  text += "<br>"
+  text += "<div>/ <a href='/'>Home</a> / <a href='items'>Items</a> / <a href='about'>About</a> /</div>"
   return HttpResponse(text)
 
 def item(request, id):
  found = False
- for it in itemslist:
-  if (it['id'] == id):
-   text = "Name: "+str(it['name'])+", Quantity: "+str(it['quantity'])
-   text += "<br/><a href='/items'>Back to items list</a>"
+ for item in itemslist:
+  if (item['id'] == id):
+   context = dict(item)
    found = True
  if (found):
-  return HttpResponse(text)
+  return render(request, "item.html", context)
  else:
   text = "Good with id "+str(id)+" not found"
  return HttpResponseNotFound(text)

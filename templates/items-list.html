@@ -5,10 +5,18 @@
     <title>Item list</title>
 </head>
 <body>
+    <div><a href='/'>Home</a> > <a href='/items'>Item list</div>
+    <h2>Item list</h2>
     <ol>
         {% for item in items %}
-        <li>Name: <a href='/item/{{ item.id }}'>{{item.name}}</a>, Quantity: {{item.quantity}}</li>
+        <li><a href='/item/{{ item.id }}'>{{item.name}}</a>, Quantity:
+        {% if item.quantity %}
+        {{ item.quantity }}</li>
+        {% else  %}
+        N/A
+        {% endif %}
         {% endfor %}
-    </ol>    
+    </ol><br/>
+    <div>/ <a href='/'>Home</a> / <a href='items'>Items</a> / <a href='about'>About</a> /</div>
 </body>
 </html>
