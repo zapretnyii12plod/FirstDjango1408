@@ -9,9 +9,9 @@
     <h2>Item list</h2>
     <ol>
         {% for item in items %}
-        <li><a href='/item/{{ item.id }}'>{{item.name}}</a>, Quantity:
-        {% if item.quantity %}
-        {{ item.quantity }}</li>
+        <li><a href='/item/{{ item.id }}'>{{item.name}} {{ item.brand}}</a>, Quantity:
+        {% if item.count %}
+        {{ item.count }}</li>
         {% else  %}
         N/A
         {% endif %}

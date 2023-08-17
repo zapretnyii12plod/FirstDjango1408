@@ -1,13 +1,15 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
+from MainApp.models import Item
+from django.core.exceptions import ObjectDoesNotExist
 
-itemslist = [
-   {"id": 1, "name": "Кроссовки abibas" ,"quantity":5},
-   {"id": 2, "name": "Куртка кожаная" ,"quantity":2},
-   {"id": 5, "name": "Coca-cola 1 литр" ,"quantity":12},
-   {"id": 7, "name": "Картофель фри" ,"quantity":0},
-   {"id": 8, "name": "Кепка" ,"quantity":124},
-]
+# itemslist = [
+#    {"id": 1, "name": "Кроссовки abibas" ,"quantity":5},
+#    {"id": 2, "name": "Куртка кожаная" ,"quantity":2},
+#    {"id": 5, "name": "Coca-cola 1 литр" ,"quantity":12},
+#    {"id": 7, "name": "Картофель фри" ,"quantity":0},
+#    {"id": 8, "name": "Кепка" ,"quantity":124},
+# ]
 
 # Create your views here.
 def root_old(request):
@@ -37,16 +39,15 @@ def about(request):
   return HttpResponse(text)
 
 def item(request, id):
- found = False
- for item in itemslist:
-  if (item['id'] == id):
-   context = dict(item)
-   found = True
- if (found):
+#  for item in itemslist:
+#   if (item['id'] == id):
+#    context = dict(item)
+ try:
+  context = dict(Item.objects.get(pk=id))
   return render(request, "item.html", context)
- else:
+ except ObjectDoesNotExist:
   text = "Good with id "+str(id)+" not found"
- return HttpResponseNotFound(text)
+  return HttpResponseNotFound(text)
 
 def items(request):
 #  text = "<ol>"
@@ -54,6 +55,7 @@ def items(request):
 #   text += "<li>Number: "+str(it['id'])+ " Name: <a href='/item/"+str(it['id'])+"'>"+str(it['name'])+"</a>, Quantity: "+str(it['quantity'])+"</li>"
 #  text += "</ol>" 
 #  return HttpResponse(text)
+ itemslist = Item.objects.all()
  context = {
   "items": itemslist
  }
