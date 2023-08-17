@@ -33,7 +33,7 @@ def about(request):
   for idx, str_ in user.items():
    text += idx + ': ' + str_ + '<br/>'
   text += "<br>"
-  text += "<div>/ <a href='/'>Home</a> / <a href='items'>Items</a> / <a href='about'>About</a> /</div>"
+  text += "<div>/ <a href='/'>Home</a> / <a href='/items'>Items</a> / <a href='/about'>About</a> /</div>"
   return HttpResponse(text)
 
 def item(request, id):
