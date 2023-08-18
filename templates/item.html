@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Item - {{ name }}</title>
-</head>
-<body>
-    <div><a href='/'>Home</a> > <a href='/items'>Item list</a> > <a href='/item/{{id}}'>Item - {{ name }}</a></div>
-    <br/>
-    Name: {{ name }}, Brand: {{ brand}}, Quantity: {{ quantity | default:"Out of stock" }}</li>
-    <br/><br/>
-    <a href='/items'>Back to items list</a><br/><br/>
-    <div>/ <a href='/'>Home</a> / <a href='/items'>Items</a> / <a href='/about'>About</a> /</div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Item - {{ name }}</title>
+{% endblock %}
+
+{% block headcrumps %}
+<div><a href='{% url 'root' %}'>Home</a> > <a href='{% url 'items' %}'>Item list</a> > <a href='{% url 'item' item.id %}'>Item - {{ name }}</a></div>
+{% endblock %}
+
+{% block content %}
+<br/>
+Name: {{ name }}, Brand: {{ brand}}, Quantity: {{ quantity | default:"Out of stock" }}</li>
+<br/><br/>
+<a href='{% url 'items' %}'>Back to items list</a><br/><br/>
+{% endblock %}

@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from MainApp import views
+# from django.conf import settings
+# from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.root),
-    path('about', views.about),
-    path('item/<int:id>', views.item),
-    path('items', views.items)
+    path('', views.root, name='root'),
+    path('about', views.about, name='about'),
+    path('item/<int:id>', views.item, name='item'),
+    path('items', views.items, name='items')
 ]

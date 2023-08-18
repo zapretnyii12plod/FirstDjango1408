@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    <title>Start page</title>
+    {% endblock %}
+    {% load static %}
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+<header> 
+    {% include 'header.html' %}
+</header>
+<main>
+    <img width="50px" src="{% static 'django.svg' %}" alt="dj">
+    {% block content %}
+    {% endblock %}
+</main>
+<footer>
+    {% include 'footer.html' %}
+</footer>
+</body>
+</html>

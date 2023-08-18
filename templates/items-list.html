@@ -1,16 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Item list</title>
-</head>
-<body>
-    <div><a href='/'>Home</a> > <a href='/items'>Item list</div>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Item list</title>
+{% endblock %}
+
+{% block style %}
+{% load static %} 
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block headcrumps %}
+<div><a href='{% url 'root' %}'>Home</a> > <a href='{% url 'items' %}'>Item list</div>
+{% endblock %}
+
+{% block content %}
     <h2>Item list</h2>
-        <div style="display:flex;">
+        <div class="container">
             {% for item in items %}
-               <div style="border:1px solid #000;flex:auto;padding:20px;margin:5px">
-               <h4><a href='/item/{{ item.id }}'>{{item.name}} {{ item.brand}}</a><br/>
+               <div class="list">
+               <h4><a href='{% url 'item' item.id %}'>{{item.name}} {{ item.brand}}</a><br/>
                Quantity:
                {% if item.count %}
                    {{ item.count }}</li>
@@ -22,6 +30,5 @@
             {% endfor %}
         </div>
     <br/>
-    <div>/ <a href='/'>Home</a> / <a href='/items'>Items</a> / <a href='/about'>About</a> /</div>
-</body>
-</html>
+{% endblock %}    
+

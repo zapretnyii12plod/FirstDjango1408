@@ -1,0 +1,10 @@
+.container {
+    display:flex;
+}
+
+.list {
+    border:1px solid #000;
+    flex:auto;
+    padding:20px;
+    margin:5px
+}

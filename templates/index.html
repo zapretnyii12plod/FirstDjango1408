@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Start page</title>
-</head>
-<body>
-    <div><a href='/'>Home</a></div>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Start page</title>
+{% endblock %}    
+
+{% block headcrumps %}
+<div><a href='{% url 'root' %}'>Home</a></div>
+{% endblock %}
+
+{% block content %}
     <h1>Hello</h1>
 
     My name is <i>{{ name }}.</i><br/>
     My email for link: <i>{{ email }}</i><br/><br/>
 
-    <a href="/items">Item list</a><br/><br/>
+    <a href="{% url 'items' %}">Item list</a><br/><br/>
 
     This is main page.<br/>
     <i>Site under construction</i><br/><br/>
-    <div>/ <a href='/'>Home</a> / <a href='/items'>Items</a> / <a href='/about'>About</a> /</div>
-</body>
-</html>
+{% endblock %}
