@@ -7,7 +7,13 @@
 <body>
     <div><a href='/'>Home</a> > <a href='/items'>Item list</a> > <a href='/item/{{id}}'>Item - {{ name }}</a></div>
     <br/>
-    Name: {{ name }}, Quantity: {{ quantity }}<br/><br/>
+    Name: {{ name }}, Brand: {{ brand}}, Quantity:
+        {% if quantity %}
+        {{ quantity }}</li>
+        {% else  %}
+        Out of stock
+        {% endif %}
+    <br/><br/>
     <a href='/items'>Back to items list</a><br/><br/>
     <div>/ <a href='/'>Home</a> / <a href='/items'>Items</a> / <a href='/about'>About</a> /</div>
 </body>

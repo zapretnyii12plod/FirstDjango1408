@@ -43,7 +43,8 @@ def item(request, id):
 #   if (item['id'] == id):
 #    context = dict(item)
  try:
-  context = dict(Item.objects.get(pk=id))
+  one_item = Item.objects.get(pk=id)
+  context = {'id':one_item.id, 'name':one_item.name, 'brand':one_item.brand, 'quantity':one_item.count}
   return render(request, "item.html", context)
  except ObjectDoesNotExist:
   text = "Good with id "+str(id)+" not found"

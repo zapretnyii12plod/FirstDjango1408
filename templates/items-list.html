@@ -7,16 +7,21 @@
 <body>
     <div><a href='/'>Home</a> > <a href='/items'>Item list</div>
     <h2>Item list</h2>
-    <ol>
-        {% for item in items %}
-        <li><a href='/item/{{ item.id }}'>{{item.name}} {{ item.brand}}</a>, Quantity:
-        {% if item.count %}
-        {{ item.count }}</li>
-        {% else  %}
-        N/A
-        {% endif %}
-        {% endfor %}
-    </ol><br/>
+        <div style="display:flex;">
+            {% for item in items %}
+               <div style="border:1px solid #000;flex:auto;padding:20px;margin:5px">
+               <h4><a href='/item/{{ item.id }}'>{{item.name}} {{ item.brand}}</a><br/>
+               Quantity:
+               {% if item.count %}
+                   {{ item.count }}</li>
+               {% else  %}
+                   Out of stock
+               {% endif %}</h4>
+               {{ item.description }}
+               </div>
+            {% endfor %}
+        </div>
+    <br/>
     <div>/ <a href='/'>Home</a> / <a href='/items'>Items</a> / <a href='/about'>About</a> /</div>
 </body>
 </html>
