@@ -44,6 +44,8 @@ def item(request, id):
 #    context = dict(item)
  try:
   one_item = Item.objects.get(pk=id)
+  #one_item.description = 'Armored car is not included'
+  #one_item.save()
   context = {'id':one_item.id, 'name':one_item.name, 'brand':one_item.brand, 'quantity':one_item.count}
   return render(request, "item.html", context)
  except ObjectDoesNotExist:
