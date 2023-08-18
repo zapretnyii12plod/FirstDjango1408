@@ -8,3 +8,5 @@ class Item(models.Model):
    description = models.CharField(max_length=255, default='')
    count = models.PositiveIntegerField() 
 
+   def __repr__(self):
+      return 'Item('+str(self.name)+','+str(self.brand)+','+str(self.description)+','+str(self.count)+')'
