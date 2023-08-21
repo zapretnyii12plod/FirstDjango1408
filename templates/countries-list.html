@@ -15,8 +15,8 @@
 <a href='{% url 'countries_by_letter' letter %}'>{{ letter }}</a>&nbsp;&nbsp;
 {% endfor %}
 <ul class="ul_no_mark">
-{% for idx, country in countries %}
-<li>{{idx}}. <a href='{% url 'country' idx %}'>{{ country }}</a>
+{% for country in countries %}
+<li>{{country.id}}. <a href='{% url 'country' country.id %}'>{{ country.name }}</a>
 {% endfor %}
 </ul>
 {% for page in pages %}

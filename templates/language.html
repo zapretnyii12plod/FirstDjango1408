@@ -1,11 +1,11 @@
 {% extends 'base2.html' %}
 
 {% block title %}
-<title>Language {{ language }}</title>
+<title>Language {{ language.name }}</title>
 {% endblock %}
 
 {% block content %}
-    <h1>{{ language }}</h1>
+    <h1>{{ language.name }}</h1>
 
     Countries:<ul>
     {% for country in countries %}
