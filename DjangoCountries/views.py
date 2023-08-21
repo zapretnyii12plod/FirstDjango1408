@@ -37,10 +37,10 @@ def bd(request):
 
  return HttpResponse('Ok')
 
-def root(request):
+def countries_index(request):
  context = {}
 
- return render(request, 'country-index.html', context)
+ return render(request, 'countries-index.html', context)
 
 def countries_list(request, p):
 # with open("country.json", "r") as read_file:

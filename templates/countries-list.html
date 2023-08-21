@@ -22,4 +22,5 @@
 {% for page in pages %}
 <a href='{% url 'countries-list' page %}'>{{ page }}</a>&nbsp;&nbsp;
 {% endfor %}
+<br/><br/><a href='{% url 'countries-index' %}'>Back to main page</a>&nbsp;&nbsp;
 {% endblock %}
