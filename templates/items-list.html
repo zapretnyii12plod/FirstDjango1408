@@ -5,15 +5,12 @@
 {% endblock %}
 
 {% block style %}
-{% load static %} 
+{% load static %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock %}
 
-{% block headcrumps %}
-<div><a href='{% url 'root' %}'>Home</a> > <a href='{% url 'items' %}'>Item list</div>
-{% endblock %}
-
 {% block content %}
+<div><a href='{% url 'root' %}'>Home</a> > <a href='{% url 'items' %}'>Item list</div>
     <h2>Item list</h2>
         <div class="container">
             {% for item in items %}

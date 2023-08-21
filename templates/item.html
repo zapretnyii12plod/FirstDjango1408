@@ -4,13 +4,20 @@
 <title>Item - {{ name }}</title>
 {% endblock %}
 
-{% block headcrumps %}
-<div><a href='{% url 'root' %}'>Home</a> > <a href='{% url 'items' %}'>Item list</a> > <a href='{% url 'item' item.id %}'>Item - {{ name }}</a></div>
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock %}
 
 {% block content %}
+<div><a href='{% url 'root' %}'>Home</a> > <a href='{% url 'items' %}'>Item list</a> > <a href='{% url 'item' item.id %}'>Item - {{ name }}</a></div>
 <br/>
-Name: {{ name }}, Brand: {{ brand}}, Quantity: {{ quantity | default:"Out of stock" }}</li>
+Name: {{ name }}, Brand: {{ brand}}, Quantity: {{ quantity | default:"Out of stock" }}
+<ul class="ul_no_mark">
+{% for color in colors %}
+    <li><div class="div_color" style="background-color:{{color.name}};"></div>&nbsp;&nbsp;{{ color.name }}
+{% endfor %}
+</ul>
 <br/><br/>
 <a href='{% url 'items' %}'>Back to items list</a><br/><br/>
 {% endblock %}

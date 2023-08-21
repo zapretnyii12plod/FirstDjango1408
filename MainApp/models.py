@@ -5,11 +5,14 @@ from django.db import models
 class Color(models.Model):
    name = models.CharField(max_length=32)
 
+   def __repr__(self):
+      return 'Color('+str(self.name)+')'
+
 class Item(models.Model):
    name  = models.CharField(max_length=100)
    brand = models.CharField(max_length=100)
    description = models.CharField(max_length=255, default='')
-   count = models.PositiveIntegerField(),
+   count = models.PositiveIntegerField(default=0)
    colors = models.ManyToManyField(to=Color)
 
    def __repr__(self):

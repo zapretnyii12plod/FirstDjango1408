@@ -16,13 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from MainApp import views
+# from MainApp import views
+from DjangoCountries import views
 # from django.conf import settings
 # from django.conf.urls.static import static
 
 urlpatterns = [
+#    path('', views.root, name='root'),
+#    path('about', views.about, name='about'),
+#    path('item/<int:id>', views.item, name='item'),
+#    path('items', views.items, name='items')
     path('', views.root, name='root'),
-    path('about', views.about, name='about'),
-    path('item/<int:id>', views.item, name='item'),
-    path('items', views.items, name='items')
+    path('countries-list/<int:p>', views.countries_list, name='countries-list'),
+    path('country/<int:id>', views.country, name='country'),
+    path('countries_by_letter/<str:letter>', views.countries_by_letter, name='countries_by_letter'),
+    path('languages-list', views.languages_list, name='languages-list'),
+    path('language/<int:id>', views.language, name='language'),
 ]

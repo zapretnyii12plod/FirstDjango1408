@@ -2,13 +2,11 @@
 
 {% block title %}
 <title>Start page</title>
-{% endblock %}    
-
-{% block headcrumps %}
-<div><a href='{% url 'root' %}'>Home</a></div>
 {% endblock %}
 
 {% block content %}
+    <div><a href='{% url 'root' %}'>Home</a></div>
+
     <h1>Hello</h1>
 
     My name is <i>{{ name }}.</i><br/>

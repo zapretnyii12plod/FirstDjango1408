@@ -1,0 +1,25 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+<title>Country list</title>
+{% endblock %}
+
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Country list</h2>
+{% for letter in alphabet %}
+<a href='{% url 'countries_by_letter' letter %}'>{{ letter }}</a>&nbsp;&nbsp;
+{% endfor %}
+<ul class="ul_no_mark">
+{% for idx, country in countries %}
+<li>{{idx}}. <a href='{% url 'country' idx %}'>{{ country }}</a>
+{% endfor %}
+</ul>
+{% for page in pages %}
+<a href='{% url 'countries-list' page %}'>{{ page }}</a>&nbsp;&nbsp;
+{% endfor %}
+{% endblock %}

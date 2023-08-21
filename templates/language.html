@@ -1,0 +1,17 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+<title>Language {{ language }}</title>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ language }}</h1>
+
+    Countries:<ul>
+    {% for country in countries %}
+    <li>{{ country }}
+    {% endfor %}
+    </ul>
+    <a href="{% url 'languages-list' %}">Languages list</a><br/>
+    <br/><br/>
+{% endblock %}

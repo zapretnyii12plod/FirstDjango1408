@@ -44,9 +44,10 @@ def item(request, id):
 #    context = dict(item)
  try:
   one_item = Item.objects.get(id=id)
+  colors = one_item.colors.all()
   #one_item.description = 'Armored car is not included'
   #one_item.save()
-  context = {'id':one_item.id, 'name':one_item.name, 'brand':one_item.brand, 'quantity':one_item.count}
+  context = {'id':one_item.id, 'name':one_item.name, 'brand':one_item.brand, 'quantity':one_item.count, 'colors':colors}
   return render(request, "item.html", context)
  except ObjectDoesNotExist:
   text = "Good with id "+str(id)+" not found"

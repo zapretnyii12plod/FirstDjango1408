@@ -1,0 +1,11 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+<title>Start page</title>
+{% endblock %}
+
+{% block content %}
+    This is main page for countries.<br/><br/>
+    <a href="{% url 'countries-list' 1 %}">Countries list</a><br/>
+    <a href="{% url 'languages-list' %}">Languages list</a><br/>
+{% endblock %}
