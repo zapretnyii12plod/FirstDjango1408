@@ -17,3 +17,9 @@ def snippets_page(request):
     snippets = Snippet.objects.all()
     context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets)}
     return render(request, 'pages/view_snippets.html', context)
+
+def snippet(request, id):
+    snippet = Snippet.objects.get(id=id)
+    context = {'id' : snippet.id, 'name': snippet.name, 'lang': snippet.lang, 'code': snippet.code, 'creation_date': snippet.creation_date}
+    return render(request, 'pages/snippet.html', context)
+

@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.index_page),
     path('snippets/add', views.add_snippet_page, name='add_snippet_page'),
     path('snippets/list', views.snippets_page, name = 'snippets_page'),
+    path('snippet/<int:id>', views.snippet, name='snippet'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
