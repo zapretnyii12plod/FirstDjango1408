@@ -30,13 +30,13 @@
                     </tr>
                     </thead>
                     <tbody>
-{% for snippet in snippets %}
+                    {% for snippet in snippets %}
                     <tr>
                         <td scope="row">{{snippet.id}}</td>
                         <td><a href="{% url 'snippet' snippet.id %}">{{snippet.name}}</a></td>
                         <td>{{snippet.creation_date}}</td>
                     </tr>
-{% endfor %}
+                    {% endfor %}
                     </tbody>
                 </table>
                 <div align="right">
