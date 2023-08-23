@@ -13,4 +13,3 @@ class SnippetForm(ModelForm):
           'name': TextInput(attrs={'placeholder': 'Название сниппета'}),
           'code': Textarea(attrs={'placeholder': 'Код сниппета'})
        }
-       
