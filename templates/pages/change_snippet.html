@@ -16,6 +16,9 @@
                 
                 <form action="" method="post">
                     {% csrf_token %}
+                    {% if id %}
+                    <input type='hidden' name='id' value='{{ id }}'>
+                    {% endif %}
                     <table>
                         {{ form }}
                     </table>

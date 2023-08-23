@@ -5,8 +5,9 @@ from MainApp import views
 
 urlpatterns = [
     path('', views.index_page, name='home'),
-    path('snippets/add', views.add_snippet_page, name='add_snippet_page'),
+    path('snippets/change/<int:id>', views.change_snippet_page, name='change_snippet_page'),
     path('snippets/list', views.snippets_page, name = 'snippets_page'),
     path('snippet/<int:id>', views.snippet, name='snippet'),
     path('snippet/create', views.snippet_create, name='snippet_create'),
+    path('snippets/delete/<int:id>', views.delete_snippet_page, name='delete_snippet_page')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
