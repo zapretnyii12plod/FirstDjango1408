@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from MainApp.models import Snippet
 from MainApp.forms import SnippetForm
 
+from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
 
@@ -11,7 +12,7 @@ def index_page(request):
     context = {'pagename': 'PythonBin'}
     return render(request, 'pages/index.html', context)
 
-
+@login_required
 def change_snippet_page(request, id):
     if request.method == "GET":
         if (id):
