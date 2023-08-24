@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 
 from MainApp.models import Snippet
-from MainApp.forms import SnippetForm
+from MainApp.forms import SnippetForm, UserRegistrationForm
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -38,6 +38,7 @@ def change_snippet_page(request, id):
                     snippet.lang = request.POST['lang']
                     snippet.code = request.POST['code']
                     snippet.user = request.user
+                    snippet.private = request.private
                     snippet.save()
                     return redirect("snippets_page")
                 else:
@@ -73,6 +74,20 @@ def delete_snippet_page(request, id):
     snippet = Snippet.objects.get(id=id)
     snippet.delete()
     return redirect("snippets_page")
+
+def create_user(request):
+    context = {"pagename": "Регистрация пользователя"}
+    if request.method == "GET":
+        form = UserRegistrationForm()
+        context["form"] = form
+        return render(request, "pages/registration.html", context)
+    if request.method == "POST":
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        context['form'] = form
+        return render(request, "pages/registration.html", context)
 
 def login(request):
     if request.method == 'POST':

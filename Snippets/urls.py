@@ -10,6 +10,7 @@ urlpatterns = [
     path('snippet/<int:id>', views.snippet, name='snippet'),
     path('snippet/create', views.snippet_create, name='snippet_create'),
     path('snippets/delete/<int:id>', views.delete_snippet_page, name='delete_snippet_page'),
+    path('auth/register', views.create_user, name='register'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
     path('snippets/list/my', views.my_snippets_page, name = 'my_snippets')
