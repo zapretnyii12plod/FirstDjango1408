@@ -50,7 +50,7 @@ def change_snippet_page(request, id):
 
 
 def snippets_page(request):
-    snippets = Snippet.objects.all()
+    snippets = Snippet.objects.filter(private=0) | Snippet.objects.filter(user_id=request.user.id)
     context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets)}
     return render(request, 'pages/view_snippets.html', context)
 
@@ -68,6 +68,7 @@ def snippet_create(request):
        context = {'pagename': 'Добавление нового сниппета', 'form': form }
        return render(request,'pages/change_snippet.html', context)
 
+@login_required
 def delete_snippet_page(request, id):
     snippet = Snippet.objects.get(id=id)
     snippet.delete()
@@ -88,6 +89,13 @@ def login(request):
           return render(request, 'pages/index.html', context)
     return redirect('home')
 
+@login_required
 def logout(request):
     auth.logout(request)
     return redirect(request.META.get('HTTP_REFERER', 'home'))
+
+@login_required
+def my_snippets_page(request):
+    snippets = Snippet.objects.filter(user_id=request.user.id)
+    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets)}
+    return render(request, 'pages/view_snippets.html', context)
