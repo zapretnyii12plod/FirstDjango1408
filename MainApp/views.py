@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from MainApp.models import Snippet, Comment
 from MainApp.forms import SnippetForm, UserRegistrationForm, CommentForm
 
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
@@ -40,19 +41,21 @@ def change_snippet_page(request, id):
                     snippet.user = request.user
                     snippet.private = request.private
                     snippet.save()
-                    return redirect("snippets_page")
+                    return redirect("snippets_page", order_name = 'name')
                 else:
                     snippet = form.save(commit=False)
                     snippet.user = request.user
                     snippet.save()
-                    return redirect("snippets_page")
+                    return redirect("snippets_page", order_name = 'name')
        context = {'pagename': 'Изменение сниппета', 'form': form }
        return render(request,'pages/change_snippet.html', context)
 
 
-def snippets_page(request):
-    snippets = Snippet.objects.filter(private=0) | Snippet.objects.filter(user_id=request.user.id)
-    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets)}
+def snippets_page(request, order_name):
+    filter1 = Q(private=0)
+    filter2 = Q(user_id=request.user.id)
+    snippets = Snippet.objects.filter(filter1 | filter2).order_by(order_name)
+    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets), 'url': 'snippets_page'}
     return render(request, 'pages/view_snippets.html', context)
 
 def snippet(request, id):
@@ -67,7 +70,7 @@ def snippet_create(request):
        form = SnippetForm(request.POST)
        if form.is_valid():
            form.save()
-           return redirect("snippets_page")
+           return redirect("snippets_page", order_name = 'name')
        context = {'pagename': 'Добавление нового сниппета', 'form': form }
        return render(request,'pages/change_snippet.html', context)
 
@@ -75,7 +78,7 @@ def snippet_create(request):
 def delete_snippet_page(request, id):
     snippet = Snippet.objects.get(id=id)
     snippet.delete()
-    return redirect("snippets_page")
+    return redirect("snippets_page", order_name = 'name')
 
 def create_user(request):
     context = {"pagename": "Регистрация пользователя"}
@@ -112,9 +115,9 @@ def logout(request):
     return redirect(request.META.get('HTTP_REFERER', 'home'))
 
 @login_required
-def my_snippets_page(request):
-    snippets = Snippet.objects.filter(user_id=request.user.id)
-    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets)}
+def my_snippets_page(request, order_name):
+    snippets = Snippet.objects.filter(user_id=request.user.id).order_by(order_name)
+    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets), 'url': 'my_snippets'}
     return render(request, 'pages/view_snippets.html', context)
 
 @login_required

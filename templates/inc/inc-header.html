@@ -20,14 +20,14 @@
                         </a>
                     </li>
                     <li class="form-inline">
-                        <a class="btn btn-outline-info" href="{% url 'my_snippets' %}">
+                        <a class="btn btn-outline-info" href="{% url 'my_snippets' 'name' %}">
                             Мои сниппеты
                         </a>
                     </li>
 
                     {% endif %}
                     <li class="form-inline">
-                        <a class="btn btn-outline-info" href="{% url 'snippets_page' %}">
+                        <a class="btn btn-outline-info" href="{% url 'snippets_page' 'name' %}">
                             Посмотреть сниппеты
                         </a>
                     </li>

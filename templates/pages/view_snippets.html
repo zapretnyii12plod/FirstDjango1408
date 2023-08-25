@@ -24,11 +24,11 @@
                 <table class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Название</th>
-                        <th scope="col">Дата создания</th>
-                        <th scope="col">Пользователь</th>
-                        <th scope="col">Приватный</th>
+                        <th scope="col"><a href="{% url url 'id' %}">ID</a></th>
+                        <th scope="col"><a href="{% url url 'name' %}">Название</a></th>
+                        <th scope="col"><a href="{% url url 'creation_date' %}">Дата создания</a></th>
+                        <th scope="col"><a href="{% url url 'user_id' %}">Пользователь</a></th>
+                        <th scope="col"><a href="{% url url 'private' %}">Приватный</a></th>
                         <th scope="col">Опции</th>
                     </tr>
                     </thead>
