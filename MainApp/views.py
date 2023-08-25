@@ -1,8 +1,8 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
 
-from MainApp.models import Snippet
-from MainApp.forms import SnippetForm, UserRegistrationForm
+from MainApp.models import Snippet, Comment
+from MainApp.forms import SnippetForm, UserRegistrationForm, CommentForm
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -57,7 +57,9 @@ def snippets_page(request):
 
 def snippet(request, id):
     snippet = Snippet.objects.get(id=id)
-    context = {'pagename': 'Просмотр сниппета', 'id' : snippet.id, 'name': snippet.name, 'lang': snippet.lang, 'code': snippet.code, 'creation_date': snippet.creation_date}
+    comments = Comment.objects.filter(snippet=id)
+    form = CommentForm()
+    context = {'pagename': 'Просмотр сниппета', 'id' : snippet.id, 'name': snippet.name, 'lang': snippet.lang, 'code': snippet.code, 'creation_date': snippet.creation_date, 'comments': comments, 'quantity': len(comments), 'form': form}
     return render(request, 'pages/snippet.html', context)
 
 def snippet_create(request):
@@ -114,3 +116,15 @@ def my_snippets_page(request):
     snippets = Snippet.objects.filter(user_id=request.user.id)
     context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets)}
     return render(request, 'pages/view_snippets.html', context)
+
+@login_required
+def comment_add(request):
+   if request.method == "POST":
+       comment_form = CommentForm(request.POST)
+       if comment_form.is_valid():
+           comment = comment_form.save(commit=False)
+           comment.author = request.user
+           comment.snippet = Snippet.objects.get(id=request.POST['snippet'])
+           comment.save()
+       return redirect('/snippet/'+str(request.POST['snippet']))
+

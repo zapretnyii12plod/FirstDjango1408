@@ -37,5 +37,32 @@
 </fieldset>
 </div>
 </div>
+   {% if quantity %}
+   <table border="1">
+       <tr>
+          <th>Автор</th>
+          <th>Комментарий</th>
+       </tr>
+       {% for comment in comments %}
+       <tr>
+          <td>{{comment.author.username}}</td>
+          <td>{{comment.text}}</td>
+       </tr>
+       {% endfor %}
+   </table>
+   {% endif%}<br/>
+
+   {% if request.user.is_authenticated %}
+   <form action="{% url 'comment_add' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="snippet" value="{{ id }}">
+      <table>
+          {{ form }}
+      </table>
+      <br/>
+      <button type="submit">Добавить</button>
+   </form>
+   {% endif %}
+
 </div>
 {% endblock %}
