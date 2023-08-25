@@ -55,14 +55,16 @@ def snippets_page(request, order_name):
     filter1 = Q(private=0)
     filter2 = Q(user_id=request.user.id)
     snippets = Snippet.objects.filter(filter1 | filter2).order_by(order_name)
-    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets), 'url': 'snippets_page'}
+    quantity = snippets.count()
+    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': quantity, 'url': 'snippets_page'}
     return render(request, 'pages/view_snippets.html', context)
 
 def snippet(request, id):
     snippet = Snippet.objects.get(id=id)
     comments = Comment.objects.filter(snippet=id)
     form = CommentForm()
-    context = {'pagename': 'Просмотр сниппета', 'id' : snippet.id, 'name': snippet.name, 'lang': snippet.lang, 'code': snippet.code, 'creation_date': snippet.creation_date, 'comments': comments, 'quantity': len(comments), 'form': form}
+    quantity = comments.count()
+    context = {'pagename': 'Просмотр сниппета', 'id' : snippet.id, 'name': snippet.name, 'lang': snippet.lang, 'code': snippet.code, 'creation_date': snippet.creation_date, 'comments': comments, 'quantity': quantity, 'form': form}
     return render(request, 'pages/snippet.html', context)
 
 def snippet_create(request):
@@ -117,7 +119,8 @@ def logout(request):
 @login_required
 def my_snippets_page(request, order_name):
     snippets = Snippet.objects.filter(user_id=request.user.id).order_by(order_name)
-    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': len(snippets), 'url': 'my_snippets'}
+    quantity = snippets.count()
+    context = {'pagename': 'Просмотр сниппетов', 'snippets': snippets, 'quantity': quantity, 'url': 'my_snippets'}
     return render(request, 'pages/view_snippets.html', context)
 
 @login_required
